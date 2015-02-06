@@ -8,7 +8,7 @@ class AwaitLock {
   }
 
   acquireAsync() {
-    if (this._acquired) {
+    if (!this._acquired) {
       this._acquired = true;
       return;
     }
@@ -19,7 +19,7 @@ class AwaitLock {
   }
 
   releaseAsync() {
-    assert(this._promise, 'Trying to release an unacquired lock');
+    assert(this._acquired, 'Trying to release an unacquired lock');
     if (this._waitingResolvers.length > 0) {
       var resolve = this._waitingResolvers.shift();
       resolve();
