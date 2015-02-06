@@ -1,0 +1,36 @@
+{
+  "name": "await-lock",
+  "version": "0.0.0",
+  "description": "Mutex locks for ES7 async functions and delegating generator functions",
+  "main": "build/AwaitLock.js",
+  "files": [
+    "build"
+  ],
+  "scripts": {
+    "prepublish": "6to5 --out-dir build src",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ide/await-lock.git"
+  },
+  "keywords": [
+    "async",
+    "await",
+    "lock",
+    "es7",
+    "co",
+    "yield",
+    "generator",
+    "promise"
+  ],
+  "author": "James Ide",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ide/await-lock/issues"
+  },
+  "homepage": "https://github.com/ide/await-lock",
+  "devDependencies": {
+    "6to5": "^3.3.12"
+  }
+}
