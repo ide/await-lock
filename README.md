@@ -1,6 +1,9 @@
 # AwaitLock
 Mutex locks for ES7 async functions and delegating generator functions
 
+[![npm package](https://nodei.co/npm/await-lock.png?downloads=true&downl\
+oadRank=true&stars=true)](https://nodei.co/npm/await-lock/)
+
 # Usage
 
 ```javascript
