@@ -10,7 +10,7 @@ class AwaitLock {
   acquireAsync() {
     if (!this._acquired) {
       this._acquired = true;
-      return;
+      return Promise.resolve();
     }
 
     return new Promise((resolve, reject) => {
