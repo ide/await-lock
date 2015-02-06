@@ -18,7 +18,7 @@ class AwaitLock {
     });
   }
 
-  releaseAsync() {
+  release() {
     assert(this._acquired, 'Trying to release an unacquired lock');
     if (this._waitingResolvers.length > 0) {
       var resolve = this._waitingResolvers.shift();

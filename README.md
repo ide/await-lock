@@ -11,7 +11,7 @@ async function runSerialTaskAsync() {
   try {
     // Run async code in the critical section
   } finally {
-    await lock.releaseAsync();
+    lock.release();
   }
 }
 ```
@@ -25,7 +25,7 @@ var runSerialTaskAsync = co.wrap(function*() {
     // IMPORTANT: Do not return from here since the "finally" clause will not
     // run!
   } finally {
-    yield lock.releaseAsync();
+    lock.release();
   }
 });
 ```
