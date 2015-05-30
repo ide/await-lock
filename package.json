@@ -7,7 +7,7 @@
     "build"
   ],
   "scripts": {
-    "prepublish": "6to5 --out-dir build src",
+    "prepublish": "babel --out-dir build src",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -31,6 +31,6 @@
   },
   "homepage": "https://github.com/ide/await-lock",
   "devDependencies": {
-    "6to5": "^3.3.12"
+    "babel": "^5.4.7"
   }
 }
