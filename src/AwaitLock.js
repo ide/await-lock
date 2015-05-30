@@ -1,6 +1,6 @@
-var assert = require('assert');
+import assert from 'assert';
 
-class AwaitLock {
+export default class AwaitLock {
 
   constructor() {
     this._acquired = false;
@@ -13,7 +13,7 @@ class AwaitLock {
       return Promise.resolve();
     }
 
-    return new Promise((resolve, reject) => {
+    return new Promise(resolve => {
       this._waitingResolvers.push(resolve);
     });
   }
@@ -21,12 +21,10 @@ class AwaitLock {
   release() {
     assert(this._acquired, 'Trying to release an unacquired lock');
     if (this._waitingResolvers.length > 0) {
-      var resolve = this._waitingResolvers.shift();
+      let resolve = this._waitingResolvers.shift();
       resolve();
     } else {
       this._acquired = false;
     }
   }
 }
-
-module.exports = AwaitLock;
