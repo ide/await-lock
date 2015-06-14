@@ -25,8 +25,9 @@ You can also use AwaitLock with [co](https://github.com/tj/co) and generator fun
 var runSerialTaskAsync = co.wrap(function*() {
   yield lock.acquireAsync();
   try {
-    // IMPORTANT: Do not return from here since the "finally" clause will not
-    // run!
+    // IMPORTANT: Do not return a promise from here because the finally clause
+    // may run before the promise settles, and the catch clause will not run if
+    // the promise is rejected
   } finally {
     lock.release();
   }
