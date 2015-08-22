@@ -34,10 +34,10 @@
     "scriptPreprocessor": "<rootDir>/node_modules/babel-jest"
   },
   "devDependencies": {
-    "babel": "^5.4.7",
+    "babel": "^5.8.21",
     "babel-jest": "^5.3.0",
-    "co": "^4.5.4",
-    "jest-cli": "ide/jest#iojs",
-    "regenerator": "^0.8.29"
+    "co": "^4.6.0",
+    "jest-cli": "^0.5.0",
+    "regenerator": "^0.8.36"
   }
 }
