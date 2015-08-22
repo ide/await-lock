@@ -7,7 +7,7 @@ oadRank=true&stars=true)](https://nodei.co/npm/await-lock/)
 # Usage
 
 ```javascript
-var lock = new AwaitLock();
+let lock = new AwaitLock();
 
 async function runSerialTaskAsync() {
   await lock.acquireAsync();
@@ -22,7 +22,7 @@ async function runSerialTaskAsync() {
 You can also use AwaitLock with [co](https://github.com/tj/co) and generator functions.
 
 ```javascript
-var runSerialTaskAsync = co.wrap(function*() {
+let runSerialTaskAsync = co.wrap(function*() {
   yield lock.acquireAsync();
   try {
     // IMPORTANT: Do not return a promise from here because the finally clause
