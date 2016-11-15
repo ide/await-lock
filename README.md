@@ -1,5 +1,5 @@
 # AwaitLock [![Build Status](https://travis-ci.org/ide/await-lock.svg?branch=master)](https://travis-ci.org/ide/await-lock)
-Mutex locks for ES7 async functions and delegating generator functions
+Mutex locks for async functions and delegating generator functions
 
 [![npm package](https://nodei.co/npm/await-lock.png?downloads=true&downl\
 oadRank=true&stars=true)](https://nodei.co/npm/await-lock/)

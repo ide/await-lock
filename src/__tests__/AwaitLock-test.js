@@ -1,51 +1,44 @@
-jest.autoMockOff();
+import co from 'co';
 
-require('regenerator/runtime');
+import AwaitLock from '../AwaitLock';
 
-let co = require('co');
+it('can be acquired asynchronously and released', async function() {
+  let lock = new AwaitLock();
+  await lock.acquireAsync();
+  lock.release();
+});
 
-let AwaitLock = require('../AwaitLock');
+it('can be acquired with yield running in co', co.wrap(function*() {
+  let lock = new AwaitLock();
+  yield lock.acquireAsync();
+  lock.release();
+}));
 
-describe('AwaitLock', () => {
+it('throws if released while unacquired', function() {
+  let lock = new AwaitLock();
+  expect(() => {
+    lock.release();
+  }).toThrow();
+});
 
-  pit('can be acquired asynchronously and released', async function() {
-    let lock = new AwaitLock();
+it('blocks async code that has not acquired the lock', async function() {
+  let lock = new AwaitLock();
+
+  let semaphore = 1;
+  async function testSemaphore() {
     await lock.acquireAsync();
+    expect(semaphore).toBe(1);
+
+    semaphore--;
+    await Promise.resolve();
+    expect(semaphore).toBe(0);
+
+    semaphore++;
     lock.release();
-  });
+  }
 
-  pit('can be acquired with yield running in co', co.wrap(function*() {
-    let lock = new AwaitLock();
-    yield lock.acquireAsync();
-    lock.release();
-  }));
-
-  it('throws if released while unacquired', function() {
-    let lock = new AwaitLock();
-    expect(() => {
-      lock.release();
-    }).toThrow();
-  });
-
-  pit('blocks async code that has not acquired the lock', async function() {
-    let lock = new AwaitLock();
-
-    let semaphore = 1;
-    async function testSemaphore() {
-      await lock.acquireAsync();
-      expect(semaphore).toBe(1);
-
-      semaphore--;
-      await Promise.resolve();
-      expect(semaphore).toBe(0);
-
-      semaphore++;
-      lock.release();
-    }
-
-    await Promise.all([
-      testSemaphore(),
-      testSemaphore(),
-    ]);
-  });
+  await Promise.all([
+    testSemaphore(),
+    testSemaphore(),
+  ]);
 });
