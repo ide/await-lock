@@ -1,3 +1,5 @@
+import 'regenerator-runtime/runtime';
+
 import co from 'co';
 
 import AwaitLock from '../AwaitLock';
