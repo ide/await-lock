@@ -1,6 +1,6 @@
 {
   "name": "await-lock",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Mutex locks for ES2017 async functions and delegating generator functions",
   "main": "build/AwaitLock.js",
   "files": [
