@@ -6,7 +6,7 @@ import assert from 'assert';
 
 export default class AwaitLock {
   _acquired: bool;
-  _waitingResolvers: Array<(result: void) => void>;
+  _waitingResolvers: Array<() => void>;
 
   constructor() {
     this._acquired = false;
@@ -28,7 +28,7 @@ export default class AwaitLock {
     assert(this._acquired, 'Trying to release an unacquired lock');
     if (this._waitingResolvers.length > 0) {
       let resolve = this._waitingResolvers.shift();
-      resolve(undefined);
+      resolve();
     } else {
       this._acquired = false;
     }

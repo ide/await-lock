@@ -7,8 +7,9 @@
     "build"
   ],
   "scripts": {
+    "clean": "rm -rf build",
     "lint": "flow src",
-    "prepublish": "babel --ignore __tests__ --out-dir build src",
+    "prepublish": "./prepublish.sh",
     "test": "jest"
   },
   "repository": {
