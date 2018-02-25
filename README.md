@@ -7,7 +7,7 @@ Mutex locks for async functions and delegating generator functions
 # Usage
 
 ```javascript
-let lock = new AwaitLock();
+const lock = new AwaitLock();
 
 async function runSerialTaskAsync() {
   await lock.acquireAsync();
@@ -22,7 +22,7 @@ async function runSerialTaskAsync() {
 You can also use AwaitLock with [co](https://github.com/tj/co) and generator functions.
 
 ```javascript
-let runSerialTaskAsync = co.wrap(function*() {
+const runSerialTaskAsync = co.wrap(function*() {
   yield lock.acquireAsync();
   try {
     // IMPORTANT: Do not return a promise from here because the finally clause

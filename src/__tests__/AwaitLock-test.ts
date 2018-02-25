@@ -1,30 +1,28 @@
-import 'regenerator-runtime/runtime';
-
-import co from 'co';
+const co = require('co');
 
 import AwaitLock from '../AwaitLock';
 
-it('can be acquired asynchronously and released', async function() {
-  let lock = new AwaitLock();
+it('can be acquired asynchronously and released', async () => {
+  const lock = new AwaitLock();
   await lock.acquireAsync();
   lock.release();
 });
 
 it('can be acquired with yield running in co', co.wrap(function*() {
-  let lock = new AwaitLock();
+  const lock = new AwaitLock();
   yield lock.acquireAsync();
   lock.release();
 }));
 
-it('throws if released while unacquired', function() {
-  let lock = new AwaitLock();
+it('throws if released while unacquired', () => {
+  const lock = new AwaitLock();
   expect(() => {
     lock.release();
   }).toThrow();
 });
 
-it('blocks async code that has not acquired the lock', async function() {
-  let lock = new AwaitLock();
+it('blocks async code that has not acquired the lock', async () => {
+  const lock = new AwaitLock();
 
   let semaphore = 1;
   async function testSemaphore() {
