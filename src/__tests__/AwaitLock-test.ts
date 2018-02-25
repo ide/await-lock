@@ -4,13 +4,13 @@ import AwaitLock from '../AwaitLock';
 
 it('can be acquired asynchronously and released', async () => {
   const lock = new AwaitLock();
-  await lock.acquireAsync();
+  await lock.acquire();
   lock.release();
 });
 
 it('can be acquired with yield running in co', co.wrap(function*() {
   const lock = new AwaitLock();
-  yield lock.acquireAsync();
+  yield lock.acquire();
   lock.release();
 }));
 
@@ -26,7 +26,7 @@ it('blocks async code that has not acquired the lock', async () => {
 
   let semaphore = 1;
   async function testSemaphore() {
-    await lock.acquireAsync();
+    await lock.acquire();
     expect(semaphore).toBe(1);
 
     semaphore--;

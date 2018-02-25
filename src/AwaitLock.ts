@@ -4,7 +4,7 @@ export default class AwaitLock {
   private acquired = false;
   private waitingResolvers: Array<() => void> = [];
 
-  acquireAsync() {
+  acquire() {
     if (!this.acquired) {
       this.acquired = true;
       return Promise.resolve();

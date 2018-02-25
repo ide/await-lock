@@ -10,7 +10,7 @@ Mutex locks for async functions and delegating generator functions
 const lock = new AwaitLock();
 
 async function runSerialTaskAsync() {
-  await lock.acquireAsync();
+  await lock.acquire();
   try {
     // Run async code in the critical section
   } finally {
@@ -23,7 +23,7 @@ You can also use AwaitLock with [co](https://github.com/tj/co) and generator fun
 
 ```javascript
 const runSerialTaskAsync = co.wrap(function*() {
-  yield lock.acquireAsync();
+  yield lock.acquire();
   try {
     // IMPORTANT: Do not return a promise from here because the finally clause
     // may run before the promise settles, and the catch clause will not run if
