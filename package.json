@@ -36,6 +36,7 @@
   "homepage": "https://github.com/ide/await-lock",
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
     "babel-jest": "^23.0.1",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-transform-flow-strip-types": "^6.22.0",
