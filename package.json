@@ -1,7 +1,7 @@
 {
   "name": "await-lock",
   "version": "1.1.3",
-  "description": "Mutex locks for ES2017 async functions and delegating generator functions",
+  "description": "Mutex locks for async functions",
   "main": "build/AwaitLock.js",
   "types": "typescript/AwaitLock.d.ts",
   "files": [
@@ -35,16 +35,17 @@
   },
   "homepage": "https://github.com/ide/await-lock",
   "devDependencies": {
+    "@babel/core": "^7.5.5",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
-    "babel-jest": "^23.0.1",
-    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-jest": "^24.9.0",
+    "babel-plugin-add-module-exports": "^1.0.2",
     "babel-plugin-transform-flow-strip-types": "^6.22.0",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-es2017": "^6.24.1",
     "co": "^4.6.0",
-    "flow-bin": "^0.73.0",
-    "jest": "^23.1.0"
+    "flow-bin": "^0.107.0",
+    "jest": "^24.9.0"
   }
 }
