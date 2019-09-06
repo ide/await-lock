@@ -42,3 +42,35 @@ it('blocks async code that has not acquired the lock', async () => {
 
   await Promise.all([testSemaphore(), testSemaphore()]);
 });
+
+describe('tryAcquire', () => {
+  it('acquires the lock immediately without waiting', async () => {
+    let lock = new AwaitLock();
+
+    let acquired1 = lock.tryAcquire();
+    expect(acquired1).toBe(true);
+
+    let acquired2 = false;
+    lock.acquireAsync().then(() => {
+      acquired2 = true;
+    });
+
+    await Promise.resolve();
+    expect(acquired2).toBe(false);
+  });
+
+  it('returns false if the lock is not free', async () => {
+    let lock = new AwaitLock();
+
+    let acquired1 = lock.tryAcquire();
+    expect(acquired1).toBe(true);
+
+    let acquired2 = lock.tryAcquire();
+    expect(acquired2).toBe(false);
+
+    lock.release();
+
+    let acquired3 = lock.tryAcquire();
+    expect(acquired3).toBe(true);
+  });
+});
