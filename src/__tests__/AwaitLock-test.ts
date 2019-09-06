@@ -2,26 +2,29 @@ import co from 'co';
 
 import AwaitLock from '../AwaitLock';
 
-it('can be acquired asynchronously and released', async function() {
+it('can be acquired asynchronously and released', async () => {
   let lock = new AwaitLock();
   await lock.acquireAsync();
   lock.release();
 });
 
-it('can be acquired with yield running in co', co.wrap(function*() {
-  let lock = new AwaitLock();
-  yield lock.acquireAsync();
-  lock.release();
-}));
+it(
+  'can be acquired with yield running in co',
+  co.wrap(function*() {
+    let lock = new AwaitLock();
+    yield lock.acquireAsync();
+    lock.release();
+  }),
+);
 
-it('throws if released while unacquired', function() {
+it('throws if released while unacquired', () => {
   let lock = new AwaitLock();
   expect(() => {
     lock.release();
   }).toThrow();
 });
 
-it('blocks async code that has not acquired the lock', async function() {
+it('blocks async code that has not acquired the lock', async () => {
   let lock = new AwaitLock();
 
   let semaphore = 1;
@@ -37,8 +40,5 @@ it('blocks async code that has not acquired the lock', async function() {
     lock.release();
   }
 
-  await Promise.all([
-    testSemaphore(),
-    testSemaphore(),
-  ]);
+  await Promise.all([testSemaphore(), testSemaphore()]);
 });

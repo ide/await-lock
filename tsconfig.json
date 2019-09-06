@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "build",
+    "target": "es2017",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "types": ["jest", "node"],
+    "sourceMap": true,
+    "declaration": true,
+    "strict": true,
+    "noImplicitReturns": true
+  }
+}
