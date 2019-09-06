@@ -9,7 +9,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [8.x, 10.x, 12.x]
+        node-version: ['8', '10', '12']
 
     steps:
     - uses: actions/checkout@v1
@@ -21,6 +21,14 @@ jobs:
       run: |
         yarn install
         yarn lint
-        yarn test
+        yarn test --coverage
       env:
         CI: true
+    - run: cat ${GITHUB_EVENT_PATH}
+    - name: Upload coverage report
+      run: |
+        bash <(curl -s https://codecov.io/bash) \
+          -F node-${{ matrix.node-version }} \
+          -B "${GITHUB_REF//refs\/heads\//}"
+          -T "${GITHUB_REF//refs\/tags\//}"
+          -C "$GITHUB_SHA"
