@@ -28,7 +28,8 @@ jobs:
     - name: Upload coverage report
       run: |
         bash <(curl -s https://codecov.io/bash) \
-          -F node-${{ matrix.node-version }} \
-          -B "${GITHUB_REF//refs\/heads\//}"
-          -T "${GITHUB_REF//refs\/tags\//}"
+          -t "${{ secrets.CODECOV_TOKEN }}" \
+          -F node_${{ matrix.node-version }} \
+          -B "${GITHUB_REF//refs\/heads\//}" \
+          -T "${GITHUB_REF//refs\/tags\//}" \
           -C "$GITHUB_SHA"
