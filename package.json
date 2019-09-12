@@ -38,17 +38,17 @@
     "rootDir": "src"
   },
   "devDependencies": {
-    "@babel/core": "^7.5.5",
+    "@babel/core": "^7.6.0",
     "@babel/plugin-proposal-class-properties": "^7.5.5",
-    "@babel/plugin-transform-modules-commonjs": "^7.5.0",
-    "@babel/preset-typescript": "^7.3.3",
+    "@babel/plugin-transform-modules-commonjs": "^7.6.0",
+    "@babel/preset-typescript": "^7.6.0",
     "@types/co": "^4.6.2",
     "@types/jest": "^24.0.18",
-    "@types/node": "^12.7.4",
+    "@types/node": "^12.7.5",
     "babel-jest": "^24.9.0",
     "co": "^4.6.0",
     "jest": "^24.9.0",
     "prettier": "^1.18.2",
-    "typescript": "^3.6.2"
+    "typescript": "^3.6.3"
   }
 }
