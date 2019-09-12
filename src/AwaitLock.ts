@@ -26,7 +26,7 @@ export default class AwaitLock {
 
   /**
    * Acquires the lock if it is free and otherwise returns immediately without waiting. Returns
-   * `true` if the lock was free and is now acquired, and `false` otherwise
+   * `true` if the lock was free and is now acquired, and `false` otherwise,
    */
   tryAcquire(): boolean {
     if (!this._acquired) {
