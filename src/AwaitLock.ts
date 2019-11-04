@@ -1,5 +1,3 @@
-import assert from 'assert';
-
 /**
  * A mutex lock for coordination across async functions
  */
@@ -42,7 +40,10 @@ export default class AwaitLock {
    * must release the lock exactly once.
    */
   release(): void {
-    assert(this._acquired, 'Trying to release an unacquired lock');
+    if (!this._acquired) {
+      throw new Error(`Cannot release an unacquired lock`);
+    }
+
     if (this._waitingResolvers.length > 0) {
       let resolve = this._waitingResolvers.shift()!;
       resolve();
