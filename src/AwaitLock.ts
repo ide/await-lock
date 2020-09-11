@@ -51,4 +51,12 @@ export default class AwaitLock {
       this._acquired = false;
     }
   }
+
+  /**
+   * Returns the current status of the lock
+   * without affecting its status
+   */
+  get acquired(): boolean {
+    return this._acquired;
+  }
 }
