@@ -6,6 +6,14 @@ export default class AwaitLock {
   private _waitingResolvers: (() => void)[] = [];
 
   /**
+   * Whether the lock is currently acquired or not. Accessing this property does not affect the
+   * status of the lock.
+   */
+  get acquired(): boolean {
+    return this._acquired;
+  }
+  
+  /**
    * Acquires the lock, waiting if necessary for it to become free if it is already locked. The
    * returned promise is fulfilled once the lock is acquired.
    *
