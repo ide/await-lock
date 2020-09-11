@@ -38,10 +38,10 @@
     "rootDir": "src"
   },
   "devDependencies": {
-    "@babel/core": "^7.6.0",
-    "@babel/plugin-proposal-class-properties": "^7.5.5",
-    "@babel/plugin-transform-modules-commonjs": "^7.6.0",
-    "@babel/preset-typescript": "^7.6.0",
+    "@babel/core": "^7.11.6",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/plugin-transform-modules-commonjs": "^7.10.4",
+    "@babel/preset-typescript": "^7.10.4",
     "@types/co": "^4.6.2",
     "@types/jest": "^24.0.18",
     "@types/node": "^12.7.5",
