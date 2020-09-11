@@ -12,7 +12,7 @@ export default class AwaitLock {
   get acquired(): boolean {
     return this._acquired;
   }
-  
+
   /**
    * Acquires the lock, waiting if necessary for it to become free if it is already locked. The
    * returned promise is fulfilled once the lock is acquired.
@@ -25,7 +25,7 @@ export default class AwaitLock {
       return Promise.resolve();
     }
 
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       this._waitingResolvers.push(resolve);
     });
   }

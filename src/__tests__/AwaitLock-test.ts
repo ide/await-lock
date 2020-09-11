@@ -10,7 +10,7 @@ it('can be acquired asynchronously and released', async () => {
 
 it(
   'can be acquired with yield running in co',
-  co.wrap(function*() {
+  co.wrap(function* () {
     let lock = new AwaitLock();
     yield lock.acquireAsync();
     lock.release();
