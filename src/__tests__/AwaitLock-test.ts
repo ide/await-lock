@@ -31,6 +31,24 @@ it('can be acquired with a zero timeout if released in the same event loop itera
   lock.release();
 });
 
+it('is acquired in the order of the "acquireAsync" calls', async () => {
+  let lock = new AwaitLock();
+  await lock.acquireAsync();
+
+  const acquirePromises = [];
+  for (let i = 0; i < 10; i++) {
+    acquirePromises.push(lock.acquireAsync());
+  }
+
+  while (acquirePromises.length > 0) {
+    lock.release();
+    // The test will time out if the just-released lock was not acquired by the next acquirer
+    await acquirePromises.shift();
+  }
+
+  lock.release();
+});
+
 it(
   'can be acquired with yield running in co',
   co.wrap(function* () {

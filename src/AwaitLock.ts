@@ -3,7 +3,7 @@
  */
 export default class AwaitLock {
   #acquired: boolean = false;
-  #waitingResolvers: (() => void)[] = [];
+  #waitingResolvers: Set<() => void> = new Set();
 
   /**
    * Whether the lock is currently acquired or not. Accessing this property does not affect the
@@ -31,7 +31,7 @@ export default class AwaitLock {
 
     if (timeout == null) {
       return new Promise((resolve) => {
-        this.#waitingResolvers.push(resolve);
+        this.#waitingResolvers.add(resolve);
       });
     }
 
@@ -44,11 +44,11 @@ export default class AwaitLock {
           clearTimeout(timer);
           resolve();
         };
-        this.#waitingResolvers.push(resolver);
+        this.#waitingResolvers.add(resolver);
       }),
       new Promise<void>((_, reject) => {
         timer = setTimeout(() => {
-          this.#waitingResolvers.splice(this.#waitingResolvers.indexOf(resolver), 1);
+          this.#waitingResolvers.delete(resolver);
           reject(new Error(`Timed out waiting for lock`));
         }, timeout);
       }),
@@ -80,8 +80,10 @@ export default class AwaitLock {
       throw new Error(`Cannot release an unacquired lock`);
     }
 
-    if (this.#waitingResolvers.length > 0) {
-      let resolve = this.#waitingResolvers.shift()!;
+    if (this.#waitingResolvers.size > 0) {
+      // Sets preserve insertion order like a queue
+      const [resolve] = this.#waitingResolvers;
+      this.#waitingResolvers.delete(resolve);
       resolve();
     } else {
       this.#acquired = false;
