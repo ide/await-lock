@@ -2,9 +2,32 @@ import co from 'co';
 
 import AwaitLock from '../AwaitLock';
 
+jest.useFakeTimers();
+
 it('can be acquired asynchronously and released', async () => {
   let lock = new AwaitLock();
   await lock.acquireAsync();
+  lock.release();
+});
+
+it('throws if a timeout occurs before it is acquired', async () => {
+  let lock = new AwaitLock();
+  await lock.acquireAsync();
+
+  const acquirePromise = lock.acquireAsync({ timeout: 1000 });
+  jest.advanceTimersByTime(1000);
+  lock.release();
+  await expect(acquirePromise).rejects.toThrow('Timed out waiting for lock');
+});
+
+it('can be acquired with a zero timeout if released in the same event loop iteration', async () => {
+  let lock = new AwaitLock();
+  await lock.acquireAsync();
+
+  const acquirePromise = lock.acquireAsync({ timeout: 0 });
+  lock.release();
+  await expect(acquirePromise).resolves.toBeUndefined();
+
   lock.release();
 });
 
