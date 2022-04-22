@@ -5,7 +5,8 @@
   "main": "build/AwaitLock.js",
   "types": "build/AwaitLock.d.ts",
   "files": [
-    "build"
+    "build",
+    "!build/**/__tests__"
   ],
   "scripts": {
     "clean": "rm -rf build",
