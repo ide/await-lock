@@ -6,7 +6,9 @@
   "types": "build/AwaitLock.d.ts",
   "files": [
     "build",
-    "!build/**/__tests__"
+    "src",
+    "!build/**/__tests__",
+    "!src/**/__tests__"
   ],
   "scripts": {
     "clean": "rm -rf build",
@@ -36,6 +38,7 @@
   },
   "homepage": "https://github.com/ide/await-lock",
   "jest": {
+    "coverageDirectory": "<rootDir>/..",
     "rootDir": "src"
   },
   "devDependencies": {
