@@ -1,6 +1,6 @@
 {
   "name": "await-lock",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "description": "Mutex locks for async functions",
   "main": "build/AwaitLock.js",
   "types": "build/AwaitLock.d.ts",
