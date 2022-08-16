@@ -1,7 +1,9 @@
 # AwaitLock ![tests](https://github.com/ide/await-lock/workflows/Tests/badge.svg) [![codecov](https://codecov.io/gh/ide/await-lock/branch/master/graph/badge.svg)](https://codecov.io/gh/ide/await-lock)
 Mutex locks for async functions
 
-[![npm package](https://nodei.co/npm/await-lock.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/await-lock/)
+# API
+
+[API documentation](https://github.com/ide/await-lock/wiki/API-documentation)
 
 # Usage
 
