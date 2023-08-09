@@ -1,8 +1,10 @@
+const defaultKey: symbol = Symbol('defaultKey');
+
 /**
  * A mutex lock for coordination across async functions
  */
 export default class AwaitLock {
-  #acquired: boolean = false;
+  #acquired: Record<string | symbol, boolean> = { [defaultKey]: false };
   #waitingResolvers: Set<() => void> = new Set();
 
   /**
@@ -10,7 +12,7 @@ export default class AwaitLock {
    * status of the lock.
    */
   get acquired(): boolean {
-    return this.#acquired;
+    return this.#acquired[defaultKey];
   }
 
   /**
@@ -23,9 +25,13 @@ export default class AwaitLock {
    *
    * After acquiring the lock, you **must** call `release` when you are done with it.
    */
-  acquireAsync({ timeout }: { timeout?: number } = {}): Promise<void> {
-    if (!this.#acquired) {
-      this.#acquired = true;
+  acquireAsync({
+    timeout,
+    key,
+  }: { timeout?: number; key?: string | number | symbol } = {}): Promise<void> {
+    key = key ?? defaultKey;
+    if (!this.#acquired[key]) {
+      this.#acquired[key] = true;
       return Promise.resolve();
     }
 
@@ -62,9 +68,10 @@ export default class AwaitLock {
    * This method differs from calling `acquireAsync` with a zero-millisecond timeout in that it runs
    * synchronously without waiting for the JavaScript task queue.
    */
-  tryAcquire(): boolean {
-    if (!this.#acquired) {
-      this.#acquired = true;
+  tryAcquire({ key }: { key?: string | symbol | number } = {}): boolean {
+    key = key ?? defaultKey;
+    if (!this.#acquired[key]) {
+      this.#acquired[key] = true;
       return true;
     }
 
@@ -75,8 +82,9 @@ export default class AwaitLock {
    * Releases the lock and gives it to the next waiting acquirer, if there is one. Each acquirer
    * must release the lock exactly once.
    */
-  release(): void {
-    if (!this.#acquired) {
+  release({ key }: { key?: string | symbol | number } = { }): void {
+    key = key ?? defaultKey;
+    if (!this.#acquired[key]) {
       throw new Error(`Cannot release an unacquired lock`);
     }
 
@@ -86,7 +94,7 @@ export default class AwaitLock {
       this.#waitingResolvers.delete(resolve);
       resolve();
     } else {
-      this.#acquired = false;
+      this.#acquired[key] = false;
     }
   }
 }
