@@ -4,6 +4,7 @@
   "description": "Mutex locks for async functions",
   "main": "build/AwaitLock.js",
   "types": "build/AwaitLock.d.ts",
+  "type": "module",
   "files": [
     "build",
     "src",
